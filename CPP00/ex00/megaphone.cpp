@@ -6,13 +6,11 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 15:43:07 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/04 17:26:39 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:52:31 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
-#include <cctype>
 
 int main(int argc, char **argv)
 {
@@ -32,5 +30,3 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
-
-
