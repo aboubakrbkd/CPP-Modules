@@ -1,8 +1,8 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
+CFLAGS = #-Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
 RM = rm -rf
-NAME = megaphone
-SRCS = megaphone.cpp
+NAME = Phonebook
+SRCS = PhoneBook.cpp Contact.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)
@@ -10,7 +10,7 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp Contact.hpp PhoneBook.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
