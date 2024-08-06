@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 20:24:44 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 14:31:56 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:51:14 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ int	Contact::set_phone_number(const std::string& name)
 	for (int i = 0; i < name.size(); i++)
 	{
 		if (name[i] != ' ' && name[i] != '\t')
+		{
+			if (!isdigit(name[i]))
+				return (1);
 			new_number += name[i];
+		}
 	}
 	if (new_number.empty())
 		return (1);
@@ -222,6 +226,8 @@ void	PhoneBook::searchcontact(Contact &name)
 		}
 	}
 }
+
+// i need to check the eof and parse the numbers;
 
 int main(int argc, char **argv)
 {
