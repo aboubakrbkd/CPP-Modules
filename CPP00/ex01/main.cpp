@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 20:24:44 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 13:54:14 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:31:56 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void Contact::show_all(int i)
 		
 void	PhoneBook::searchcontact(Contact &name)
 {
+	bool isempty = true;
 	std::cout << std::setw(10) << "Index " << "|" ;
 	std::cout << std::setw(10) << "First name " << "|" ;
 	std::cout << std::setw(10) << "Last name " << "|" ;
@@ -191,7 +192,13 @@ void	PhoneBook::searchcontact(Contact &name)
 		{
 			if (contacts[i].get_first_name().empty())
 				break ;
+			isempty = false;
 			contacts[i].show_all(i);
+		}
+		if (isempty == true)
+		{
+			std::cout << "The Phonebook is empty " << std::endl;
+			break;
 		}
 		std::string str;
 		std::cout << "Enter the index of the contact you want to see: ";
