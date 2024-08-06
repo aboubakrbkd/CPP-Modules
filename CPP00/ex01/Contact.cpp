@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:23:20 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 22:23:24 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:01:41 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int	Contact::set_first_name(const std::string& name)
 	}
 	if (new_name.empty())
 		return (1);
-	if (new_name.size() > 10)
-		first_name = new_name.substr(0, 9) + ".";
-	else
-		first_name = new_name;
+	first_name = new_name;
 	return (0);
 }
 int	Contact::set_last_name(const std::string& name)
@@ -52,10 +49,7 @@ int	Contact::set_last_name(const std::string& name)
 	}
 	if (new_name.empty())
 		return (1);
-	if (new_name.size() > 10)
-		last_name = new_name.substr(0, 9) + ".";
-	else
-		last_name = new_name;
+	last_name = new_name;
 	return (0);
 }
 int	Contact::set_nickname(const std::string& name)
@@ -73,11 +67,7 @@ int	Contact::set_nickname(const std::string& name)
 	}
 	if (new_nickname.empty())
 		return (1);
-	if (new_nickname.size() > 10)
-
-		nickname = new_nickname.substr(0, 9) + ".";
-	else
-		nickname = new_nickname;
+	nickname = new_nickname;
 	return (0);
 }
 int	Contact::set_phone_number(const std::string& name)
@@ -99,11 +89,6 @@ int	Contact::set_phone_number(const std::string& name)
 	}
 	if (new_number.empty())
 		return (1);
-	if (new_number.size() > 10)
-	{
-		phone_number = new_number.substr(0, 9) + ".";
-		return (0);
-	}
 	phone_number = new_number;
 	return (0);
 }
@@ -123,10 +108,7 @@ int	Contact::set_darkest_secret(const std::string& name)
 	}
 	if (new_dark.empty())
 		return (1);
-	if (new_dark.size() > 10)
-		darkest_secret = new_dark.substr(0, 9) + ".";
-	else
-		darkest_secret = new_dark;
+	darkest_secret = new_dark;
 	return (0);
 }
 std::string	Contact::get_first_name()
@@ -149,14 +131,17 @@ std::string	Contact::get_darkest_secret()
 {
 	return (darkest_secret);
 }
-// Contact::~Contact()
-// {
-// 	std::cout<< "Amine zamal" << std::endl;
-// }
-void Contact::show_all(int i)
+
+std::string truncate_with_dot(const std::string& str)
 {
-	std::cout << std::setw(10) << i << "|";
-    std::cout << std::setw(10) << first_name << "|";
-    std::cout << std::setw(10) << last_name << "|";
-    std::cout << std::setw(10) << nickname << "|" << std::endl;
+    if (str.length() > 10)
+        return (str.substr(0, 9) + ".");
+    return str;
+}
+
+void Contact::show_all(int i) {
+    std::cout << std::setw(10) << i << "|";
+    std::cout << std::setw(10) << truncate_with_dot(first_name) << "|";
+    std::cout << std::setw(10) << truncate_with_dot(last_name) << "|";
+    std::cout << std::setw(10) << truncate_with_dot(nickname) << "|" << std::endl;
 }
