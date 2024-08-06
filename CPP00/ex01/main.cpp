@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 20:24:44 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 12:40:29 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:54:14 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,88 @@
 
 int	Contact::set_first_name(const std::string& name)
 {
-	if (name.empty())
+	std::string new_name;
+	int i = 0;
+	while (i < name.size())
+	{
+		if (name[i] != ' ' && name[i] != '\t')
+			new_name += name[i];
+		i++;
+	}
+	if (new_name.empty())
 		return (1);
-	first_name = name;
+	if (new_name.size() > 10)
+		first_name = new_name.substr(0, 9) + ".";
+	else
+		first_name = new_name;
 	return (0);
 }
 int	Contact::set_last_name(const std::string& name)
 {
-	if (name.empty())
+	std::string new_name;
+	for (int i = 0; i < name.size(); i++)
+	{
+		if (name[i] != ' ' && name[i] != '\t')
+			new_name += name[i];
+	}
+	if (new_name.empty())
 		return (1);
-	last_name = name;
+	if (new_name.size() > 10)
+		last_name = new_name.substr(0, 9) + ".";
+	else
+		last_name = new_name;
 	return (0);
 }
 int	Contact::set_nickname(const std::string& name)
 {
-	if (name.empty())
+	std::string new_nickname;
+	for (int i = 0; i < name.size(); i++)
+	{
+		if (name[i] != ' ' && name[i] != '\t')
+			new_nickname += name[i];
+	}
+	if (new_nickname.empty())
 		return (1);
-	nickname = name;
+	if (new_nickname.size() > 10)
+
+		nickname = new_nickname.substr(0, 9) + ".";
+	else
+		nickname = new_nickname;
 	return (0);
 }
 int	Contact::set_phone_number(const std::string& name)
 {
-	if (name.empty())
+	std::string new_number;
+	for (int i = 0; i < name.size(); i++)
+	{
+		if (name[i] != ' ' && name[i] != '\t')
+			new_number += name[i];
+	}
+	if (new_number.empty())
 		return (1);
-	phone_number = name;
+	if (new_number.size() > 10)
+	{
+		phone_number = new_number.substr(0, 9) + ".";
+		return (0);
+	}
+	phone_number = new_number;
 	return (0);
 }
 int	Contact::set_darkest_secret(const std::string& name)
 {
-	if (name.empty())
+	std::string new_dark;
+	
+	for (int i = 0; i < name.size(); i++)
+	{
+		if (name[i] != ' ' && name[i] != '\t')
+			new_dark += name[i];
+	}
+	if (new_dark.empty())
 		return (1);
-	darkest_secret = name;
+	if (new_dark.size() > 10)
+		darkest_secret = new_dark.substr(0, 9) + ".";
+	else
+		darkest_secret = new_dark;
 	return (0);
 }
 std::string	Contact::get_first_name()
