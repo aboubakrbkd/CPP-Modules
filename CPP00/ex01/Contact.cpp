@@ -6,12 +6,11 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:23:20 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 23:01:41 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:05:44 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <string>
 
 int	Contact::set_first_name(const std::string& name)
 {
