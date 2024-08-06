@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:23:22 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 21:47:42 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:06:52 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ class Contact
 		std::string	get_phone_number();
 		std::string	get_darkest_secret();
 		void		show_all(int i);
-		// ~Contact();
 };
 
 #endif
