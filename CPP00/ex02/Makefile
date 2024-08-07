@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+# CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = Phonebook
 SRCS = tests.cpp Account.cpp
