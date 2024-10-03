@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:46:41 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/03 14:21:21 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:34:19 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ int	PhoneBook::searchcontact()
 	std::string str;
 	std::cout << "Enter the index of the contact you want to see: ";
 	std::getline(std::cin, str);
-	if (str.empty())
-	{
-		std::cout << "Please enter a valid index" << std::endl;
-		return (1);
-	}
 	if (std::cin.eof())
 	{
 		std::cout << "\nGood bye" << std::endl;
 		exit(0);
+	}
+	if (str.empty())
+	{
+		std::cout << "Please enter a valid index" << std::endl;
+		return (1);
 	}
 	int index = std::atoi(str.c_str());
 	if (index >= 0 && index < 8)
