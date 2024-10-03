@@ -6,13 +6,13 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:23:20 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 23:05:44 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:20:04 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-int	Contact::set_first_name(const std::string& name)
+int	Contact::set_first_name(std::string name)
 {
 	std::string new_name;
 	unsigned long i = 0;
@@ -33,7 +33,7 @@ int	Contact::set_first_name(const std::string& name)
 	first_name = new_name;
 	return (0);
 }
-int	Contact::set_last_name(const std::string& name)
+int	Contact::set_last_name(std::string name)
 {
 	std::string new_name;
 	if(std::cin.eof())
@@ -51,7 +51,7 @@ int	Contact::set_last_name(const std::string& name)
 	last_name = new_name;
 	return (0);
 }
-int	Contact::set_nickname(const std::string& name)
+int	Contact::set_nickname(std::string name)
 {
 	std::string new_nickname;
 	if(std::cin.eof())
@@ -69,7 +69,7 @@ int	Contact::set_nickname(const std::string& name)
 	nickname = new_nickname;
 	return (0);
 }
-int	Contact::set_phone_number(const std::string& name)
+int	Contact::set_phone_number(std::string name)
 {
 	std::string new_number;
 	if(std::cin.eof())
@@ -91,7 +91,7 @@ int	Contact::set_phone_number(const std::string& name)
 	phone_number = new_number;
 	return (0);
 }
-int	Contact::set_darkest_secret(const std::string& name)
+int	Contact::set_darkest_secret(std::string name)
 {
 	std::string new_dark;
 	
@@ -131,7 +131,7 @@ std::string	Contact::get_darkest_secret()
 	return (darkest_secret);
 }
 
-std::string truncate_with_dot(const std::string& str)
+std::string truncate_with_dot(std::string str)
 {
     if (str.length() > 10)
         return (str.substr(0, 9) + ".");

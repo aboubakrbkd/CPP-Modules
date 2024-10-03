@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 21:46:41 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/06 23:05:35 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:21:21 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ PhoneBook::PhoneBook()
 {
 	last_contact = 0;
 }
-void	PhoneBook::add_contact(const Contact& name)
+void	PhoneBook::add_contact(Contact name)
 {
 	contacts[last_contact] = name;
 	last_contact = (last_contact + 1) % 8;
 }
-void	PhoneBook::add_to_the_contact(Contact& user)
+void	PhoneBook::add_to_the_contact(Contact user)
 {
 	std::string input;
 	std::cout <<"Enter ur First name: ";

@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:23:22 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/07 19:25:28 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:19:24 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ class Contact
 		std::string phone_number;
 		std::string darkest_secret;
 	public:
-		int	set_first_name(const std::string& name);
-		int	set_last_name(const std::string& name);
-		int	set_nickname(const std::string& name);
-		int	set_phone_number(const std::string& name);
-		int	set_darkest_secret(const std::string& name);
+		int	set_first_name(std::string name);
+		int	set_last_name(std::string name);
+		int	set_nickname(std::string name);
+		int	set_phone_number(std::string name);
+		int	set_darkest_secret(std::string name);
 		
 		std::string	get_first_name();
 		std::string	get_last_name();
