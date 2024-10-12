@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 21:51:35 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/07 21:52:03 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/04 14:51:54 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/05 20:15:28 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 Zombie* newZombie(std::string name)
 {
-	return (new Zombie(name));
+	Zombie *zombie = new Zombie(name);
+	return (zombie);
 }

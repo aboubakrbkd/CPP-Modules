@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 21:50:25 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/08/07 22:14:04 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/04 14:51:51 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/05 17:24:06 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 int main()
 {
-	std::cout << "----------Heap Zombies----------" << std::endl; 
-	Zombie *zombie = newZombie("First");
-	Zombie *zombie1 = newZombie("Second");
-	zombie->announce();
-	zombie1->announce();
-	delete(zombie);
-	delete(zombie1);
-	std::cout << "----------Stack Zombies----------" << std::endl;
-	randomChump("First");
-	randomChump("second");	
+	std::cout << "-------Stack Zombie-------" << std::endl;
+	randomChump("Zombie1");
+	randomChump("Zombie2");
+	randomChump("Zombie3");
+	std::cout << "-------Heap Zombie-------" << std::endl;
+	Zombie* z4 = newZombie("Zombie4");
+	Zombie* z5 = newZombie("Zombie5");
+	Zombie* z6 = newZombie("Zombie6");
+	z4->announce();
+	z5->announce();
+	z6->announce();
+	delete z4;
+	delete z5;
+	delete z6;
 }

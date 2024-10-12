@@ -1,14 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/04 16:35:29 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/05 20:24:32 by aboukdid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Zombie.hpp"
-#include <stdlib.h>
 
-int	main()
+int main()
 {
-    int N = 5;
-    std::string name = "Aboubakr";
-    Zombie *horde;
-
-    horde = zombieHorde(N, name);
-    for (int i = 0; i < N; i++)
-        horde[i].announce();
-    delete [] horde;
+	int n = 5;
+	Zombie* zombies = zombieHorde(n, "zombie");
+	for (int i = 0; i < n; i++)
+		zombies[i].announce();
+	delete [] zombies;
 }

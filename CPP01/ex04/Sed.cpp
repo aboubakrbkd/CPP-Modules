@@ -1,60 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Sed.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/04 20:40:36 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/05 21:07:48 by aboukdid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Sed.hpp"
 
-Sed::Sed()
+void	Sed::set_first(std::string first)
 {
-    return ;
+	this->first = first;
 }
 
-Sed::~Sed()
+void	Sed::set_s1(std::string s1)
 {
-    std::cout << "Mission Complete" << std::endl;
+	this->s1 = s1;
 }
 
-std::string Sed::get_s1()
+void	Sed::set_s2(std::string s2)
 {
-    return s1;
+	this->s2 = s2;
 }
 
-std::string Sed::get_s2()
+void	Sed::replace()
 {
-    return s2;
-}
-
-void    Sed::set_s1(std::string name)
-{
-    this->s1 = name;
-}
-
-void    Sed::set_s2(std::string name)
-{
-    this->s2 = name;
-}
-
-void    Sed::replace(const std::string &filename)
-{
-    std::ifstream first_file(filename.c_str());
-    if (!first_file)
-    {
-        std::cerr << "Error in opening the file!" << std::endl;
-        return ;
-    }
-    std::ofstream output_file((filename + ".replace").c_str());
-    if (!output_file)
-    {
-        std::cerr << "Error in creating the file!" << std::endl;
-        return ;
-    }
-    std::ostringstream tmp;
+	std::ifstream first_file;
+	first_file.open(first.c_str());
+	if (!first_file.is_open())
+	{
+		std::cout << "Error opening the file" << std::endl;
+		return ;
+	}
+	std::string last = first + ".replace";
+	std::ofstream last_file;
+	last_file.open(last.c_str());
+	if (!last_file.is_open())
+	{
+		std::cout << "Error creating the last file" << std::endl;
+		first_file.close();
+		return ;
+	}
+	if (s1.empty())
+	{
+		std::cout << "S1 is empty" << std::endl;
+		first_file.close();
+		last_file.close();
+		return ;
+	}
+	std::ostringstream tmp;
     tmp << first_file.rdbuf();
     std::string str = tmp.str();
-
-    size_t pos = 0;
-    while ((pos = str.find(s1, pos)) != std::string::npos)
-    {
-        str.erase(pos, s1.length());
-        str.insert(pos, s2);
-        pos = pos + s2.length();
-    }
-    output_file << str;
+	size_t i = 0;
+	while ((i = str.find(s1, i)) != std::string::npos)
+	{
+		str.erase(i, s1.length());
+		str.insert(i, s2);
+		i += s2.length();
+	}
+	last_file << str;
+	std::cout << "Mission complete" << std::endl;
+	first_file.close();
+	last_file.close();
+	
 }
-

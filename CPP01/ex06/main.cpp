@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/05 14:12:22 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/05 20:03:36 by aboukdid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 
 int main(int argc, char **argv)
 {
-    Harl harl;
-
-    if (argc != 2)
-    {
-        std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-        return (1);
-    }
-    int level = harl.getlevel(argv[1]);
-    switch(level)
+	Harl harl;
+	std::string level;
+	if (argc != 2)
 	{
-		case 0 :
+		std::cout << "The input is ./HarlFilter [COMMAND]" << std::endl;
+		return (1);
+	}
+	level = argv[1];
+	int levels = getlevel(level);
+	switch (levels)
+	{
+		case 0:
 			harl.complain("DEBUG");
-		case 1 :
+		case 1:
 			harl.complain("INFO");
-		case 2 :
+		case 2:
 			harl.complain("WARNING");
-		case 3 :
+		case 3:
 			harl.complain("ERROR");
 			break ;
-		default :
-			std::cout << "[ Probably complaining about insignificant problem. ]" << std::endl;
+		default:
+			harl.complain("HAHA");
 	}
-    return 0;
 }
