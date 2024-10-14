@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 20:28:47 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/13 13:51:31 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/14 16:32:58 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/14 16:34:00 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef IMATERIASOURCE_HPP
+#define IMATERIASOURCE_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include "AMateria.hpp"
 
-class Dog : public Animal {
-	private:
-		Brain *ideas;
+
+class IMateriaSource
+{
 	public:
-		Dog();
-		Dog(const Dog& obj);
-		Dog& operator=(const Dog& obj);
-		~Dog();
-		void	makeSound() const;
+		virtual ~IMateriaSource() {}
+		virtual void learnMateria(AMateria*) = 0;
+		virtual AMateria* createMateria(std::string const & type) = 0;
 };
+
 
 #endif

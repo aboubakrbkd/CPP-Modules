@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 20:28:47 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/13 13:51:31 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/14 16:19:57 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/14 16:20:32 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef CURE_HPP
+#define CURE_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include "AMateria.hpp"
 
-class Dog : public Animal {
-	private:
-		Brain *ideas;
+class Cure : public AMateria {
 	public:
-		Dog();
-		Dog(const Dog& obj);
-		Dog& operator=(const Dog& obj);
-		~Dog();
-		void	makeSound() const;
+		Cure();
+		~Cure();
+		Cure(const Cure& obj);
+		Cure& operator=(const Cure& obj);
+		Cure* clone() const ;
+		void use(ICharacter& target);
 };
+
 
 #endif

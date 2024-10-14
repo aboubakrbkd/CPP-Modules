@@ -5,29 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 14:19:44 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/14 19:55:48 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/13 15:23:33 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/14 19:57:36 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
-#include "WrongCat.hpp"
-#include "WrongAnimal.hpp"
-#include "Brain.hpp"
+#include "AMateria.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "Character.hpp"
+#include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
+#include "MateriaSource.hpp"
+
 
 int main()
 {
-	const int size = 8;
-	Animal* animal[size];
-
-	for (int i =0; i < size / 2; i++)
-		animal[i] = new Dog();
-	for (int i = size / 2; i < size; i++)
-		animal[i] = new Cat();
-	for (int i = 0; i < size; i++)
-		animal[i]->makeSound();
-	for (int i = 0; i < size; i++)
-		delete animal[i];
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	delete bob;
+	delete me;
+	delete src;
 }

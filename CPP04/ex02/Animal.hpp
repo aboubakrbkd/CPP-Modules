@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 20:28:47 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/13 13:51:31 by aboukdid         ###   ########.fr       */
+/*   Created: 2024/10/12 14:19:39 by aboukdid          #+#    #+#             */
+/*   Updated: 2024/10/13 14:56:55 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef ANIMAL_HPP
+#define ANIMAL_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include <iostream>
+#include <string>
 
-class Dog : public Animal {
-	private:
-		Brain *ideas;
+class Animal {
+	protected:
+		std::string type;
 	public:
-		Dog();
-		Dog(const Dog& obj);
-		Dog& operator=(const Dog& obj);
-		~Dog();
-		void	makeSound() const;
+		Animal();
+		Animal(const Animal& obj);
+		Animal& operator=(const Animal& obj);
+		virtual ~Animal();
+		virtual void	makeSound() const = 0;
+		std::string getType() const ;
 };
 
 #endif
