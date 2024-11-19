@@ -9,6 +9,8 @@
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150
 
+class Form;
+
 class Bureaucrat {
     private:
         const std::string name;
@@ -31,6 +33,7 @@ class Bureaucrat {
         std::string getName() const;
         void increment();
         void decrement();
+        void signForm(Form &form); //need to do
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &obj);
