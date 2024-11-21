@@ -50,12 +50,12 @@ bool Form::getIs_Signed() const
     return (is_signed);
 }
 
-const int Form::GetSign_Grade() const
+int Form::GetSign_Grade() const
 {
     return (sign_grade);
 }
 
-const int Form::Get_Execute_grade() const
+int Form::Get_Execute_grade() const
 {
     return (execute_grade);
 }
