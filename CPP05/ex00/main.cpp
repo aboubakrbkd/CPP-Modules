@@ -3,34 +3,49 @@
 int main()
 {
     try {
-        Bureaucrat("Aboubakr", 160);
+        std::cout << "Creating Bureaucrat with valid grade..." << std::endl;
+        Bureaucrat aboubakr("aboubakr", 42);
+        std::cout << aboubakr << std::endl;
+
+        std::cout << "Incrementing aboubakr's grade..." << std::endl;
+        aboubakr.increment();
+        std::cout << aboubakr << std::endl;
+
+        std::cout << "Decrementing aboubakr's grade..." << std::endl;
+        aboubakr.decrement();
+        std::cout << aboubakr << std::endl;
+
+        std::cout << "Creating Bureaucrat with too high grade..." << std::endl;
+        Bureaucrat high("High", 0);
+    } 
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
-    catch(std::exception& e) {
-        std::cout << "Eroor: " << e.what() << std::endl;
+    try {
+        std::cout << "Creating Bureaucrat with too low grade..." << std::endl;
+        Bureaucrat low("Low", 151);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+    try {
+        std::cout << "Testing increment beyond limits..." << std::endl;
+        Bureaucrat top("Top", 1);
+        std::cout << top << std::endl;
+        top.increment();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
 
     try {
-        Bureaucrat("Aboubakr", 0);
+        std::cout << "Testing decrement beyond limits..." << std::endl;
+        Bureaucrat bottom("Bottom", 150);
+        std::cout << bottom << std::endl;
+        bottom.decrement();
     }
-    catch(std::exception &e)
-    {
-        std::cout << "Eroor: " << e.what() << std::endl;
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
-
-    try {
-        Bureaucrat a("Aboubakr", 150);
-        a.increment();
-    }
-    catch(std::exception& e)
-    {
-        std::cout << "Eroor: " << e.what() << std::endl;
-    }
-    try {
-        Bureaucrat a("Aboubakr", 1);
-        a.decrement();
-    }
-    catch(std::exception& e)
-    {
-        std::cout << "Eroor: " << e.what() << std::endl;
-    }
+    std::cout << "All tests completed." << std::endl;
 }
