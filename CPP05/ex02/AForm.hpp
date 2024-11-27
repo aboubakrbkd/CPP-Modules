@@ -6,7 +6,7 @@
 class Bureaucrat;
 
 class AForm {
-	private:
+	protected:
 		const std::string name;
 		bool is_signed;
 		const int sign_grade;
@@ -20,9 +20,13 @@ class AForm {
 			public:
 				const char *what() const throw();
 		};
+		class FormNotSignedException : public std::exception {
+			public:
+				const char *what() const throw();
+		};
 		AForm();
 		AForm(std::string name, int sign_grade, int exec_grade);
-		~AForm();
+		virtual ~AForm();
 		AForm(const AForm& obj);
 		AForm& operator=(const AForm& obj);
 
@@ -32,6 +36,8 @@ class AForm {
 		int getexec_grade() const;
 
 		void	beSigned(Bureaucrat obj);
+		virtual void execute(Bureaucrat const &executor) = 0;
+
 
 };
 
