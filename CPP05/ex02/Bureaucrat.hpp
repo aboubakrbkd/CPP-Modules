@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private:
@@ -35,7 +35,7 @@ class Bureaucrat {
 		void	increment();
 		void	decrement();
 
-		void	signForm(Form &form);
+		void	signForm(AForm &form);
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &obj);

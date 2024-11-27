@@ -1,9 +1,9 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 int main()
 {
-    Form validForm("Valid Form", 50, 100);
+    AForm validForm("Valid Form", 50, 100);
     std::cout << validForm << std::endl;
     Bureaucrat john("John", 45);
     std::cout << john << std::endl;
@@ -11,7 +11,7 @@ int main()
     std::cout << validForm << std::endl;
     try
     {
-        Form highForm("High Form", 0, 10);
+        AForm highForm("High Form", 0, 10);
     }
     catch (const std::exception &e)
     {
@@ -19,7 +19,7 @@ int main()
     }
     try
     {
-        Form lowForm("Low Form", 200, 180);
+        AForm lowForm("Low Form", 200, 180);
     }
     catch (const std::exception &e)
     {
