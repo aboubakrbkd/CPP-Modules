@@ -32,7 +32,7 @@ const std::string ShrubberyCreationForm::getTarget() const
 	return (target);
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const &executor)
+void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (!this->is_signed)
 		throw FormNotSignedException();

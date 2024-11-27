@@ -36,7 +36,7 @@ class AForm {
 		int getexec_grade() const;
 
 		void	beSigned(Bureaucrat obj);
-		virtual void execute(Bureaucrat const &executor) = 0;
+		virtual void execute(Bureaucrat const &executor) const = 0;
 
 
 };

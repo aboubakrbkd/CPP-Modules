@@ -32,7 +32,7 @@ const std::string RobotomyRequestForm::getTarget() const
 	return (target);
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const& executor)
+void	RobotomyRequestForm::execute(Bureaucrat const& executor) const
 {
 	int ran;
 	if (!this->is_signed)

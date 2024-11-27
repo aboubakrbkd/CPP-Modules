@@ -32,7 +32,7 @@ const std::string PresidentialPardonForm::getTarget() const
 	return (target);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const& executor)
+void	PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
 	if (!this->is_signed)
 		throw FormNotSignedException();
