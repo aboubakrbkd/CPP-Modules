@@ -2,10 +2,12 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <sstream>
 #include <string>
-#include <cstdlib>
 #include <cctype>
-#include <cmath>
+#include <stdexcept>
+#include <limits>
+#include <iomanip>
 
 enum  {
 	INT = 0,
