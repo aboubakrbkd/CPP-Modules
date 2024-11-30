@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <limits>
 #include <iomanip>
+#include <exception>
 
 enum  {
 	INT = 0,
@@ -24,12 +25,9 @@ class ScalarConverter {
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& obj);
 		ScalarConverter& operator=(const ScalarConverter& obj);
-	public:
 		~ScalarConverter();
+	public:
 		static void	convert(const std::string& value);
-		// i need to detect the type 
-		// then i need to convert it from std::string to its actual type
-		//then convert it to the 3 other type
 };
 
 #endif
