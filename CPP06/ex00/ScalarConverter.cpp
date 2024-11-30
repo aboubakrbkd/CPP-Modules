@@ -60,7 +60,7 @@ void	ScalarConverter::convert(const std::string& value)
     	    std::stringstream(value) >> i;
     	    std::cout << "char: ";
    			if (std::isprint(i))
-    	    	std::cout << static_cast<char>(i);
+    	    	std::cout << '\'' << static_cast<char>(i) << '\'';
     		else
     	    	std::cout << "Non displayable";
     		std::cout << "\n";
@@ -75,7 +75,7 @@ void	ScalarConverter::convert(const std::string& value)
 			char c = value[0];
 			std::cout << "char: ";
 			if (std::isprint(static_cast<int>(c)))
-				std::cout << c;
+				std::cout << '\'' << c << '\'';
 			else
 				std::cout << "Non displayable";
 			std::cout << "\n";
@@ -94,23 +94,23 @@ void	ScalarConverter::convert(const std::string& value)
 			std::stringstream(stripped_value) >> f;
 			std::cout << "char: ";
 			if (std::isprint(static_cast<int>(f)))
-				std::cout<< static_cast<char>(f);
+				std::cout<< '\'' << static_cast<char>(f) << '\'';
 			else
 				std::cout << "Non displayable";
 			std::cout << "\n";
 			std::cout << "int: " << static_cast<int>(f) << std::endl;
-			std::cout << "float: " << f << "f" << std::endl;
+			std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 			std::cout << "double: " << std::fixed << std::setprecision(1)  << static_cast<double>(f) << std::endl;
 			break;
 		}
 		case 3:
 		{
-			std::cout << "--dpuble--" << std::endl;
+			std::cout << "--double--" << std::endl;
 			double d;
 			std::stringstream(value) >> d;
 			std::cout << "char: ";
 			if (std::isprint(static_cast<int>(d)))
-				std::cout << static_cast<char>(d);
+				std::cout << '\'' <<static_cast<char>(d) << '\'';
 			else
 				std::cout << "Non displayable";
 			std::cout << "\n";
@@ -123,24 +123,24 @@ void	ScalarConverter::convert(const std::string& value)
 		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: impossible" << std::endl;
-			std::cout << "float: " << type << std:: endl;
-			std::cout << "double: " << static_cast<double>(std::numeric_limits<float>::infinity()) << std::endl;
+			std::cout << "float: " << "inff" << std:: endl;
+			std::cout << "double: " << "inf" << std::endl;
 			break;
 		}
 		case 5:
 		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: impossible" << std::endl;
-			std::cout << "float: " << type << std:: endl;
-			std::cout << "double: " << static_cast<double>(std::numeric_limits<float>::infinity()) << std::endl;
+			std::cout << "float: " << "-inff" << std:: endl;
+			std::cout << "double: " << "-inf" << std::endl;
 			break;
 		}
 		case 6:
 		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: impossible" << std::endl;
-			std::cout << "float: " << type << std:: endl;
-			std::cout << "double: " << static_cast<double>(std::numeric_limits<float>::infinity()) << std::endl;
+			std::cout << "float: " << "nanf" << std:: endl;
+			std::cout << "double: " << "nan" << std::endl;
 			break;
 		}
 		default:
@@ -149,15 +149,4 @@ void	ScalarConverter::convert(const std::string& value)
 			break;
 		}
 	}
-}
-
-int main(int argc, char **argv)
-{
-	(void) argv;
-	if (argc != 2)
-	{
-		std::cerr << "The output need to be ./convert arg1" << std::endl;
-		return (1);
-	}
-	ScalarConverter::convert(argv[1]);
 }
