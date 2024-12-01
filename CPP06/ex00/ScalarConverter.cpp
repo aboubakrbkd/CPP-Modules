@@ -25,6 +25,8 @@ int DetectType(const std::string& value)
 	}
 	for (size_t i = 0; i < value.length(); i++)
 	{
+		if ((i == 0 && value[i] == '.') || (i == value.length() - 1 && value[i] == '.'))
+			break ;
 		if (value[i] == '.')
 			count++;
 		else if (!std::isdigit(value[i]) && (value[i] != '+' && value[i] != '-'))
@@ -32,17 +34,20 @@ int DetectType(const std::string& value)
 		if (i == value.length() - 1 && count == 1)
 			return (DOUBLE);
 	}
-	if (value.back() == 'f')
+	if (value.back() == 'f' && value.find('f') == value.length() - 1)
 	{
 		count = 0;
+		bool Digit = false;
 		for (size_t i = 0; i < value.length() - 1; i++)
 		{
-			if (value[i] == '.')
-				count++;
-			else if (!std::isdigit(value[i]) && (value[i] != '+' && value[i] != '-'))
-				break;
+        	if (value[i] == '.')
+        	    count++;
+        	else if (std::isdigit(value[i]))
+        	    Digit = true;
+        	else if (value[i] != '+' && value[i] != '-')
+        	    break;
 		}
-		if (count == 1)
+		if (count == 1 && Digit)
 			return (FLOAT);
 	}
 	return (-1);

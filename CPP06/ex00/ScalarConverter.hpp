@@ -30,4 +30,5 @@ class ScalarConverter {
 		static void	convert(const std::string& value);
 };
 
+// overflow
 #endif
