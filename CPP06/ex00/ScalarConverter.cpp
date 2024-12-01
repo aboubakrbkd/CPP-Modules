@@ -25,7 +25,7 @@ int DetectType(const std::string& value)
 		}
 		if (isInteger)
 		{
-			std::istringstream iss(value);
+			std::stringstream iss(value);
 			long num;
 			iss >> num;
 			if (!iss.fail() && num >= INT_MIN && num <= INT_MAX)

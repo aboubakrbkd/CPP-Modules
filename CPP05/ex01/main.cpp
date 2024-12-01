@@ -25,7 +25,8 @@ int main()
     {
         std::cout << "Error creating Low Form: " << e.what() << std::endl;
     }
-    Bureaucrat bob("Bob", 150);
+    Bureaucrat bob("Bob", 1);
+	std::cout << bob << std::endl;
     bob.signForm(validForm);
     std::cout << validForm << std::endl;
 }

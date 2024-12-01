@@ -18,16 +18,12 @@ int main() {
     }
 	std::cout << "------------------------" << std::endl;
     try {
-        Bureaucrat bob("Bob", 3);  // High enough to sign and execute
+        Bureaucrat bob("Bob", 3);
         std::cout << bob << std::endl;
 
         RobotomyRequestForm form("Robot");
         std::cout << form << std::endl;
-
-        // Bob signs the form
         bob.signForm(form);
-
-        // Bob executes the form
         form.execute(bob);
 
     } catch (const std::exception& e) {

@@ -62,7 +62,7 @@ int Form::getexec_grade() const
 
 void	Form::beSigned(Bureaucrat obj)
 {
-	if (obj.getGrade() >= this->getsign_grade())
+	if (obj.getGrade() <= this->getsign_grade())
 		this->is_signed =true;
 	else
 		throw GradeTooLowException();
