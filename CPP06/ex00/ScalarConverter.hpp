@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <exception>
 
+
 enum  {
 	INT = 0,
 	CHAR = 1,
@@ -30,5 +31,4 @@ class ScalarConverter {
 		static void	convert(const std::string& value);
 };
 
-// overflow
 #endif

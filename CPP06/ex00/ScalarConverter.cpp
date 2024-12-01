@@ -1,7 +1,5 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter::~ScalarConverter() {}
-
 int DetectType(const std::string& value)
 {
 	size_t count = 0;
@@ -14,14 +12,25 @@ int DetectType(const std::string& value)
 		return (NANN);
 	if (value.length() == 1 && (std::isprint(value[0]) && !std::isdigit(value[0])))
 		return(CHAR);
-	for (size_t i = 0; i < value.length(); i++)
+	if ((value[0] == '+' || value[0] == '-' || std::isdigit(value[0])))
 	{
-		if (i == 0 && (value[i] == '+' || value[i] == '-'))
-			continue;
-		if (!std::isdigit(value[i]))
-			break ;
-		if (i == value.length() - 1)
-            return (INT);
+		bool isInteger = true;
+		for (size_t i = 1; i < value.length(); i++)
+		{
+			if (!std::isdigit(value[i]))
+			{
+				isInteger = false;
+				break;
+			}
+		}
+		if (isInteger)
+		{
+			std::istringstream iss(value);
+			long num;
+			iss >> num;
+			if (!iss.fail() && num >= INT_MIN && num <= INT_MAX)
+				return (INT);
+		}
 	}
 	for (size_t i = 0; i < value.length(); i++)
 	{
@@ -40,12 +49,12 @@ int DetectType(const std::string& value)
 		bool Digit = false;
 		for (size_t i = 0; i < value.length() - 1; i++)
 		{
-        	if (value[i] == '.')
-        	    count++;
-        	else if (std::isdigit(value[i]))
-        	    Digit = true;
-        	else if (value[i] != '+' && value[i] != '-')
-        	    break;
+			if (value[i] == '.')
+				count++;
+			else if (std::isdigit(value[i]))
+				Digit = true;
+			else if (value[i] != '+' && value[i] != '-')
+				break;
 		}
 		if (count == 1 && Digit)
 			return (FLOAT);
@@ -60,23 +69,23 @@ void	ScalarConverter::convert(const std::string& value)
 	{
 		case 0 :
 		{
-			std::cout << "--int---" << std::endl;
+			std::cout << "--Int---" << std::endl;
 			int i;
-    	    std::stringstream(value) >> i;
-    	    std::cout << "char: ";
+			std::stringstream(value) >> i;
+			std::cout << "char: ";
    			if (std::isprint(i))
-    	    	std::cout << '\'' << static_cast<char>(i) << '\'';
-    		else
-    	    	std::cout << "Non displayable";
-    		std::cout << "\n";
-    	    std::cout << "int: " << i << "\n";
-    	    std::cout << "float: " << std::fixed << std::setprecision(1)  << static_cast<float>(i) << "f\n";
-    	    std::cout << "double: " << std::fixed << std::setprecision(1)  << static_cast<double>(i) << "\n";
+				std::cout << '\'' << static_cast<char>(i) << '\'';
+			else
+				std::cout << "Non displayable";
+			std::cout << "\n";
+			std::cout << "int: " << i << "\n";
+			std::cout << "float: " << std::fixed << std::setprecision(1)  << static_cast<float>(i) << "f\n";
+			std::cout << "double: " << std::fixed << std::setprecision(1)  << static_cast<double>(i) << "\n";
 			break;
 		}
 		case 1:
 		{
-			std::cout << "---char---" << std::endl;
+			std::cout << "---Char---" << std::endl;
 			char c = value[0];
 			std::cout << "char: ";
 			if (std::isprint(static_cast<int>(c)))
@@ -91,10 +100,10 @@ void	ScalarConverter::convert(const std::string& value)
 		}
 		case 2:
 		{
-			std::cout << "----float---" << std::endl;
+			std::cout << "----Float---" << std::endl;
 			std::string stripped_value = value;
-        	if (stripped_value.back() == 'f')
-        	    stripped_value.pop_back();
+			if (stripped_value.back() == 'f')
+				stripped_value.pop_back();
 			float f;
 			std::stringstream(stripped_value) >> f;
 			std::cout << "char: ";
@@ -110,7 +119,7 @@ void	ScalarConverter::convert(const std::string& value)
 		}
 		case 3:
 		{
-			std::cout << "--double--" << std::endl;
+			std::cout << "--Double--" << std::endl;
 			double d;
 			std::stringstream(value) >> d;
 			std::cout << "char: ";
