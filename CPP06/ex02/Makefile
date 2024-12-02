@@ -1,7 +1,7 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = convert
+NAME = identify
 SRCS = Identify.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
