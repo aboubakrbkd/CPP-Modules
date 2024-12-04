@@ -1,8 +1,8 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = easy
-SRCS = main.cpp easyfind.cpp
+NAME = Span
+SRCS = main.cpp Span.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)
@@ -10,7 +10,7 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-%.o: %.cpp easyfind.hpp
+%.o: %.cpp Span.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
