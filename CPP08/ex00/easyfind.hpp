@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
+#include <list>
 
 template <typename T>
 std::size_t function(T& arr, int occ)
@@ -12,7 +14,7 @@ std::size_t function(T& arr, int occ)
         if (arr[i] == occ)
             return (i);
     }
-    throw std::runtime_error("Element not found");
+    throw std::runtime_error("Element not found"); 
 }
 
 #endif
