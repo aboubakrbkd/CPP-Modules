@@ -46,6 +46,52 @@ int main()
 		std::cout << *rcit << std::endl;
 		++rcit;
 	}
-	std::stack<int> s(mstack);
+	std::cout << "----------------------------" << std::endl;
+	std::cout << "Testing with list Container" << std::endl;
+	std::cout << "----------------------------" << std::endl;
+	std::list<int> mlist;
+	mlist.push_back(5);
+	mlist.push_back(17);
+	std::cout << mlist.back() << std::endl;
+	mlist.pop_back();
+	std::cout << mlist.size() << std::endl;
+	mlist.push_back(3);
+	mlist.push_back(5);
+	mlist.push_back(737);
+	mlist.push_back(0);
+	std::cout << "----Iterator----" << std::endl;
+	std::list<int>::iterator it1 = mlist.begin();
+	std::list<int>::iterator ite1 = mlist.end();
+	++it1;
+	--it1;
+	while (it1 != ite1)
+	{
+		std::cout << *it1 << std::endl;
+		++it1;
+	}
+	std::cout << "-----Const_Iterator----" << std::endl;
+	std::list<int>::const_iterator cit1 = mlist.begin();
+	std::list<int>::const_iterator cite1 = mlist.end();
+	while (cit1 != cite1)
+	{
+		std::cout << *cit1 << std::endl;
+		++cit1;
+	}
+	std::cout << "-----Reverse_Iterator-----" << std::endl;
+	std::list<int>::reverse_iterator rit1 = mlist.rbegin();
+	std::list<int>::reverse_iterator rite1 = mlist.rend();
+	while (rit1 != rite1)
+	{
+		std::cout << *rit1 << std::endl;
+		++rit1;
+	}
+	std::cout << "-----Reverse_const_iterator-----" << std::endl;
+	std::list<int>::const_reverse_iterator rcit1 = mlist.rbegin();
+	std::list<int>::const_reverse_iterator rcite1 = mlist.rend();
+	while (rcit1 != rcite1)
+	{
+		std::cout << *rcit1 << std::endl;
+		++rcit1;
+	}
 	return 0;
 }
