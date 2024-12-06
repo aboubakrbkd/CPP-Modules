@@ -66,7 +66,7 @@ int main()
 	test.push_back(9);
 	test.push_back(10);
     try {
-		sp5.infinit_call(test.begin(), test.end());
+		sp5.infinit_call<std::vector<int> >(test.begin(), test.end());
         std::cout << "Shortest Span: " << sp5.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << sp5.longestSpan() << std::endl;
     } catch (std::exception &e) {

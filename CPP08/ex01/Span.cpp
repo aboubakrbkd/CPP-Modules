@@ -45,11 +45,3 @@ int	Span::longestSpan()
 
 	return (end - begin);
 }
-
-void	Span::infinit_call(std::vector<int>::iterator begin, std::vector<int>::iterator end)
-{
-	size_t size = std::distance(begin, end);
-	if (v.size() + size > max_int)
-		throw std::runtime_error("Span is full");
-	v.insert(v.end(), begin, end);
-}

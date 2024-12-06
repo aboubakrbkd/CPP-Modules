@@ -19,8 +19,14 @@ class Span {
 		void	addNumber(unsigned int n);
 		int		shortestSpan();
 		int		longestSpan();
-		void	infinit_call(std::vector<int>::iterator begin, std::vector<int>::iterator end);
-		
+		template <typename T>
+		void	infinit_call(typename T::iterator begin, typename T::iterator end){
+			size_t size = std::distance(begin, end);
+			if (v.size() + size > max_int)
+				throw std::runtime_error("Span is full");
+			v.insert(v.end(), begin, end);
+		};
+
 };
 
 #endif
