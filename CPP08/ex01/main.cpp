@@ -42,8 +42,7 @@ int main()
 	}
 	std::cout << "---Large Element Test---" << std::endl;
     Span sp4(1000);
-    for (int i = 1; i <= 1000; ++i)
-        sp4.addNumber(i);
+	sp4.infinit_call(1000);
     try {
         std::cout << "Shortest Span: " << sp4.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << sp4.longestSpan() << std::endl;

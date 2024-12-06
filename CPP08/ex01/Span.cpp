@@ -45,3 +45,11 @@ int	Span::longestSpan()
 
 	return (end - begin);
 }
+
+void	Span::infinit_call(int size)
+{
+	if (size <= 0)
+		throw std::runtime_error("no negative");
+	for (int i = 0; i < size; i++)
+		addNumber(i);
+}

@@ -19,6 +19,7 @@ class Span {
 		void	addNumber(unsigned int n);
 		int		shortestSpan();
 		int		longestSpan();
+		void	infinit_call(int size);
 };
 
 #endif
