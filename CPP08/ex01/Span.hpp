@@ -19,7 +19,8 @@ class Span {
 		void	addNumber(unsigned int n);
 		int		shortestSpan();
 		int		longestSpan();
-		void	infinit_call(int size);
+		void	infinit_call(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		
 };
 
 #endif

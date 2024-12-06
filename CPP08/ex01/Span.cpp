@@ -11,7 +11,7 @@ Span::Span(const Span& obj)
 
 void	Span::addNumber(unsigned int n) 
 {
-	if (v.size() >= INT_MAX)
+	if (v.size() >= max_int)
 		throw std::runtime_error("cannt add more");
 	if (std::find(v.begin(), v.end(), n) != v.end())
 		throw std::runtime_error("Duplicate error found");
@@ -46,10 +46,10 @@ int	Span::longestSpan()
 	return (end - begin);
 }
 
-void	Span::infinit_call(int size)
+void	Span::infinit_call(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	if (size <= 0)
-		throw std::runtime_error("no negative");
-	for (int i = 0; i < size; i++)
-		addNumber(i);
+	size_t size = std::distance(begin, end);
+	if (v.size() + size > max_int)
+		throw std::runtime_error("Span is full");
+	v.insert(v.end(), begin, end);
 }

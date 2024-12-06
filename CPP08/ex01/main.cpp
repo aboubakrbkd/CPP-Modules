@@ -40,12 +40,35 @@ int main()
 	catch(std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << "---Full Element Test---"<< std::endl;
+	Span sp4(3);
+	sp4.addNumber(1);
+	sp4.addNumber(654);
+	sp4.addNumber(64);
+	try {
+		sp4.addNumber(15);
+	}
+	catch(std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	std::cout << "---Large Element Test---" << std::endl;
-    Span sp4(1000);
-	sp4.infinit_call(1000);
+    Span sp5(1000);
+	std::vector<int> test;
+	test.push_back(1);
+	test.push_back(2);
+	test.push_back(3);
+	test.push_back(4);
+	test.push_back(5);
+	test.push_back(6);
+	test.push_back(7);
+	test.push_back(8);
+	test.push_back(9);
+	test.push_back(10);
     try {
-        std::cout << "Shortest Span: " << sp4.shortestSpan() << std::endl;
-        std::cout << "Longest Span: " << sp4.longestSpan() << std::endl;
+		sp5.infinit_call(test.begin(), test.end());
+        std::cout << "Shortest Span: " << sp5.shortestSpan() << std::endl;
+        std::cout << "Longest Span: " << sp5.longestSpan() << std::endl;
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
