@@ -172,7 +172,7 @@ void	Bitcoin::parseInputFile()
 				if (it->first < date)
 					std::cout << date << " => " << value << " = " << it->second * value << std::endl;
 				else
-					std::cerr << "No date found iin the database for: " << date << std::endl;
+					std::cerr << "No date found in the data.csv for: " << date << std::endl;
 			}
 			else
 				std::cerr << "No date found in the data.csv for: " << date << std::endl;
