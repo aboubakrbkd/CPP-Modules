@@ -81,10 +81,35 @@ bool isValidDate(const std::string& date)
     return true;
 }
 
+bool isValidValue(std::string& value)
+{
+	int count = 0;
+	if (value.empty() || value[0] == '-')
+		return false;
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		if ((i == 0 && value[i] == '.') || i == value.size() - 1 && value[i] == '.')
+			return false;
+		if (value[i] == '.')
+			count++;
+		else if (!std::isdigit(value[i]))
+			return false;
+	}
+	if (count > 1)
+		return false;
+	std::stringstream ss(value);
+	int num;
+	ss >> num;
+	if (ss.fail() || num < 0)
+		return false;
+	return true;
+}
+
 void	Bitcoin::parseInputFile()
 {
 	std::string line;
 	std::string date;
+	std::string value_s;
 	if (std::getline(infile, line))
 	{
 		if (line != "date | value")
@@ -95,6 +120,12 @@ void	Bitcoin::parseInputFile()
 	}
 	while (std::getline(infile, line))
 	{
+		size_t pos = line.find('|');
+		if (pos == std::string::npos)
+		{
+			std::cerr << "Missing '|'" << std::endl;
+			continue;
+		}
 		std::stringstream ss(line);
 		if (!std::getline(ss, date, '|'))
 		{
@@ -109,9 +140,19 @@ void	Bitcoin::parseInputFile()
 			std::cerr << "Invalid date: " << std::endl;
 			continue;
 		}
-		else{
-			std::cout << "ok" << std::endl;
+		if (!std::getline(ss, value_s))
+		{
+			std::cerr << "Missing value" << std::endl;
 			continue;
 		}
+		size_t first_value = value_s.find_first_not_of(" \t");
+        size_t last_value = value_s.find_last_not_of(" \t");
+        value_s = value_s.substr(first_value, (last_value - first_value + 1));
+        if (!isValidValue(value_s))
+        {
+            std::cerr << "Invalid value: " <<  std::endl;
+            continue;
+        }
+        std::cout << "Valid entry: " << date << " | " << value_s << std::endl;
 	}
 }
