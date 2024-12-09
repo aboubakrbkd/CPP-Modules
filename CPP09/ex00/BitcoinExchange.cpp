@@ -128,12 +128,6 @@ void	Bitcoin::parseInputFile()
 	}
 	while (std::getline(infile, line))
 	{
-		size_t pos = line.find('|');
-		if (pos == std::string::npos)
-		{
-			std::cerr << "Error: bad input =>" << std::endl;
-			continue;
-		}
 		std::stringstream ss(line);
 		if (!std::getline(ss, date, '|'))
 		{
@@ -143,6 +137,12 @@ void	Bitcoin::parseInputFile()
 		size_t first = date.find_first_not_of(" \t");
         size_t last = date.find_last_not_of(" \t");
         date = date.substr(first, (last - first + 1));
+		size_t pos = line.find('|');
+		if (pos == std::string::npos)
+		{
+			std::cerr << "Error: bad input => " << date << std::endl;
+			continue;
+		}
 		if (!isValidDate(date))
 		{
 			std::cerr << "Invalid date: " << std::endl;
