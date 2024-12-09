@@ -2,18 +2,26 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
-#include <fstream> // to read CSV file
-#include <sstream> // to parse
-#include <string>
+#include <fstream>
+#include <sstream>
 #include <map>
+#include <string>
+#include <stdexcept>
+#include <cctype>
 
-/*
-    Step 1: I need to parse then store the data in  map container
-    
-*/
 class Bitcoin {
     private:
-        std::ifstream file;
+        std::ifstream infile;
+		std::ifstream data_file;
+		std::map<std::string, double> mp;
+	public:
+		Bitcoin();
+		~Bitcoin();
+		Bitcoin(const Bitcoin& obj);
+		Bitcoin& operator=(const Bitcoin& obj);
+		void	parsing(const std::string& file);
+		void	loaddata();
+		void	parseInputFile();
 };
 
 #endif

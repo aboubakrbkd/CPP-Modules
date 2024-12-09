@@ -1,17 +1,20 @@
 #include "BitcoinExchange.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-    // std::cout << "Hello" << std::endl;
-    std::map<std::string, int>mp;
-    mp["one"] = 1;
-    mp["two"] = 2;
-    mp["three"] = 3;
-
-    std::map<std::string, int>::iterator it = mp.begin();
-    while (it != mp.end())
-    {
-        std::cout <<"Key: " << it->first <<" value: " << it->second << std::endl;
-        it++;
-    }
+	if (argc != 2)
+	{
+		std::cerr << "The programme accept ./btc filename.txt" << std::endl;
+		return (1);
+	}
+	try {
+		Bitcoin btc;
+		btc.parsing(argv[1]);
+		btc.loaddata();
+		btc.parseInputFile();
+	}
+	catch(std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }
