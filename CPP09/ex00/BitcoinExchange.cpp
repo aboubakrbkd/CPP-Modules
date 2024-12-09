@@ -52,7 +52,6 @@ void	Bitcoin::loaddata()
 
 bool isValidDate(const std::string& date)
 {
-	std::cout << "-90" << std::endl;
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
         return false;
     for (size_t i = 0; i < date.size(); ++i)
@@ -60,9 +59,12 @@ bool isValidDate(const std::string& date)
         if ((i != 4 && i != 7) && !std::isdigit(date[i]))
             return false;
     }
-    int year, month, day;
+    int year;
+	int month;
+	int day;
     std::stringstream ss(date);
-    char dash1, dash2;
+    char dash1;
+	char dash2;
     ss >> year >> dash1 >> month >> dash2 >> day;
     if (dash1 != '-' || dash2 != '-')
         return false;
@@ -86,12 +88,13 @@ void	Bitcoin::parseInputFile()
 	if (std::getline(infile, line))
 	{
 		if (line != "date | value")
+		{
 			std::cerr << "Invalid header in input file date | value" << std::endl;
-		return ;
+				return ;
+		}
 	}
 	while (std::getline(infile, line))
 	{
-		std::cout << "esdf" << std::endl;
 		std::stringstream ss(line);
 		if (!std::getline(ss, date, '|'))
 		{
@@ -104,6 +107,10 @@ void	Bitcoin::parseInputFile()
 		if (!isValidDate(date))
 		{
 			std::cerr << "Invalid date: " << std::endl;
+			continue;
+		}
+		else{
+			std::cout << "ok" << std::endl;
 			continue;
 		}
 	}
