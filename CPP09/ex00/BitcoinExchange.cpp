@@ -20,36 +20,6 @@ void	Bitcoin::parsing(const std::string& file)
 		throw std::runtime_error("Cannot open The Data.csv");
 }
 
-void	Bitcoin::loaddata()
-{
-	std::string line;
-	if (std::getline(data_file, line))
-	{
-		if (line != "date,exchange_rate")
-			std::cerr << "Invalid header in input file date,exchange_rate" << std::endl;
-		return ;
-	}
-	while (std::getline(data_file, line))
-	{
-		std::stringstream ss(line);
-		std::string date, value_date;
-		double value;
-		if (!std::getline(ss, date, ',') || !std::getline(ss, value_date))
-		{
-            std::cerr << "Invalid line in data file: " << line << std::endl;
-            continue;
-        }
-		std::stringstream value_s(value_date);
-		if (!(value_s >> value) || !value_s.eof())
-		{
-            std::cerr << "Invalid value in data file: " << value << std::endl;
-            continue;
-        }
-		mp[date] = value;
-	}
-	data_file.close();
-}
-
 bool isValidDate(const std::string& date)
 {
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
@@ -85,7 +55,10 @@ bool isValidValue(std::string& value)
 {
 	int count = 0;
 	if (value.empty() || value[0] == '-')
-		return false;
+    {
+        std::cerr << "Error: not a positive number" << std::endl;
+        return false;
+    }
 	for (size_t i = 0; i < value.size(); i++)
 	{
 		if ((i == 0 && value[i] == '.') || i == value.size() - 1 && value[i] == '.')
@@ -100,9 +73,44 @@ bool isValidValue(std::string& value)
 	std::stringstream ss(value);
 	int num;
 	ss >> num;
-	if (ss.fail() || num < 0)
+	if (ss.fail() || num > 1000 || num < 0)
+    {
+        std::cerr << "Error: too large a number." << std::endl;
 		return false;
+    }
 	return true;
+}
+
+void	Bitcoin::loaddata()
+{
+	std::string line;
+	if (std::getline(data_file, line))
+	{
+		if (line != "date,exchange_rate")
+		{
+			std::cerr << "Invalid header in input file date,exchange_rate" << std::endl;
+				return ;
+		}
+	}
+	while (std::getline(data_file, line))
+	{
+		std::stringstream ss(line);
+		std::string date, value_date;
+		double value;
+		if (!std::getline(ss, date, ',') || !std::getline(ss, value_date))
+		{
+            std::cerr << "Invalid line in data file: " << line << std::endl;
+            continue;
+        }
+		std::stringstream value_s(value_date);
+		if (!(value_s >> value) || !value_s.eof())
+		{
+            std::cerr << "Invalid value in data file: " << value << std::endl;
+            continue;
+        }
+		mp[date] = value;
+	}
+	data_file.close();
 }
 
 void	Bitcoin::parseInputFile()
@@ -115,7 +123,7 @@ void	Bitcoin::parseInputFile()
 		if (line != "date | value")
 		{
 			std::cerr << "Invalid header in input file date | value" << std::endl;
-				return ;
+            return ;
 		}
 	}
 	while (std::getline(infile, line))
@@ -123,7 +131,7 @@ void	Bitcoin::parseInputFile()
 		size_t pos = line.find('|');
 		if (pos == std::string::npos)
 		{
-			std::cerr << "Missing '|'" << std::endl;
+			std::cerr << "Error: bad input =>" << std::endl;
 			continue;
 		}
 		std::stringstream ss(line);
@@ -149,10 +157,25 @@ void	Bitcoin::parseInputFile()
         size_t last_value = value_s.find_last_not_of(" \t");
         value_s = value_s.substr(first_value, (last_value - first_value + 1));
         if (!isValidValue(value_s))
-        {
-            std::cerr << "Invalid value: " <<  std::endl;
             continue;
-        }
-        std::cout << "Valid entry: " << date << " | " << value_s << std::endl;
-	}
+        double value;
+        std::stringstream sss(value_s);
+        sss >> value;
+        std::map<std::string, double>::iterator it = mp.lower_bound(date);
+        if (it != mp.end() && it->first == date)
+			std::cout << date << " => " << value << " = " << value * it->second << std::endl;
+		else
+		{
+			if (it != mp.begin())
+			{
+				it--;
+				if (it->first < date)
+					std::cout << date << " => " << value << " = " << it->second * value << std::endl;
+				else
+					std::cerr << "No date found iin the database for: " << date << std::endl;
+			}
+			else
+				std::cerr << "No date found in the data.csv for: " << date << std::endl;
+		}
+    }
 }
