@@ -1,7 +1,19 @@
 #include "PmergeMe.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-	std::cout << "Hello" << std::endl;
+	if (argc == 1)
+	{
+		std::cerr << "The Program accept ./PmergeMe ..." << std::endl;
+		return (1);
+	}
+	else
+	{
+		PmergeMe me;
+		for (int i = 1; i < argc; i++)
+			me.Ford_johnson(argv[i]);
+	}
+	int a = 5;
+
 }
 

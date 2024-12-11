@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:12:27 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/08 13:52:15 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:39:57 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ Fixed Fixed::operator++(int)
 {
 	Fixed result = *this;
 	this->setRawBits(this->getRawBits() + 1);
+	// this->value = this->value + 1;
 	return (result);
 }
 

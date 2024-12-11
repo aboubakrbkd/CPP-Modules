@@ -6,7 +6,7 @@
 /*   By: aboukdid <aboukdid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:12:27 by aboukdid          #+#    #+#             */
-/*   Updated: 2024/10/07 17:36:48 by aboukdid         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:29:05 by aboukdid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	Fixed::setRawBits(int const raw)
 {
 	value = raw;
 }
-
