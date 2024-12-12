@@ -18,58 +18,55 @@ bool isValidNumber(const std::string& result)
 	return true;
 }
 
-// void	DivideandSortPairs(std::vector<int> &vec, std::size_t start = 0)
-// {
-//     if (start + 1 >= vec.size()) 
-//         return; 
-// 	for (std::size_t i = 0; i + 1 < vec.size(); i += 2)
-// 	{
-// 		int a = vec[i];
-// 		int b = vec[i + 1];
-// 		if (a > b)
-// 			std::swap(a, b);
-// 		DivideandSortPairs(vec, 1);
-// 	}
-// }
-
-void DivideandSortPairs(std::vector<int>& vec, int pair_level)
+void InsertionSort(std::vector<std::pair<int, int> >& pairs)
 {
-    typedef std::vector<int>::iterator Iterator;
-
-    // Calculate the number of "pair units" for the given pair_level
-    int pair_units_nbr = vec.size() / pair_level;
-    if (pair_units_nbr < 2) 
-        return;  // Stop if there are fewer than two pairs.
-
-    // Handle the odd pair case.
-    bool is_odd = pair_units_nbr % 2 == 1;
-
-    // Calculate the bounds for the current level of iteration
-    Iterator start = vec.begin();
-    Iterator last = std::next(vec.begin(), pair_level * pair_units_nbr);
-    Iterator end = std::next(last, -(is_odd * pair_level)); // Exclude any incomplete pair at the end.
-
-    // Swap pairs of elements at the current pair_level.
-    int jump = 2 * pair_level;
-    for (Iterator it = start; it != end; std::advance(it, jump))
+    for (std::size_t i = 1; i < pairs.size(); ++i)
     {
-        Iterator this_pair = std::next(it, pair_level - 1); // Last element of this pair
-        Iterator next_pair = std::next(it, pair_level * 2 - 1); // Last element of next pair
-        if (*this_pair > *next_pair)
+       std::pair<int, int> key = pairs[i];
+       int j = i - 1;
+        while (j >= 0 && pairs[j].first > key.first) 
         {
-            std::swap(*this_pair, *next_pair);  // Swap the two pairs
+            pairs[j + 1] = pairs[j];
+            --j;
         }
+        pairs[j + 1] = key;
     }
+}
 
-    // Recursively process the next level of pairs, doubling the pair size.
-    DivideandSortPairs(vec, pair_level * 2);
+
+void DivideandSortPairs(std::vector<int>& vec)
+{
+    std::size_t len = vec.size();
+    bool hasUnpaired = (len % 2 == 1);
+    int lastElement = 0;
+    if (hasUnpaired)
+    {
+        lastElement = vec.back();
+        vec.pop_back();
+    }
+	std::vector<std::pair<int, int> > pairs;
+    for (std::size_t i = 0; i + 1 < vec.size(); i += 2)
+    {
+        int a = vec[i];
+        int b = vec[i + 1];
+        if (a < b)
+            std::swap(a, b);
+		pairs.push_back(std::make_pair(a, b));
+    }
+	InsertionSort(pairs);
+	vec.clear();
+	for (std::size_t i = 0; i < pairs.size(); i++)
+	{
+		vec.push_back(pairs[i].first);
+		vec.push_back(pairs[i].second);
+	}
+    if (hasUnpaired)
+        vec.push_back(lastElement);
 }
 
 void	PmergeMe::Ford_johnson(const std::string& result)
 {
 	std::stringstream ss(result);
-	std::vector<int> small;
-    std::vector<int> big;
     std::string tmp;
     int num;
 	while (ss >> tmp)
@@ -91,7 +88,7 @@ void	PmergeMe::Ford_johnson(const std::string& result)
 	for (std::size_t i = 0; i < vec.size(); i++)
 		std::cout << vec[i] << " ";
 	std::cout << std::endl;
-    DivideandSortPairs(vec, 1);
+    DivideandSortPairs(vec);
 	std::cout << "after:";
 	for (std::size_t i = 0; i < vec.size(); i++)
 		std::cout << vec[i] << " ";
