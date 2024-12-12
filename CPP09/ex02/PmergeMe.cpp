@@ -33,6 +33,46 @@ void InsertionSort(std::vector<std::pair<int, int> >& pairs)
     }
 }
 
+std::vector<int> GenerateJacob(int n)
+{
+    std::vector<int> jacob;
+    int i = 0;
+    while (true)
+	{
+        int j = (1 << i) - (i % 2 == 0 ? 1 : -1) / 3;
+        if (j >= n) 
+		    break;
+        jacob.push_back(j);
+        i++;
+    }
+    return (jacob);
+}
+
+
+void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
+{
+    std::vector<int> jacob = GenerateJacob(pend_chain.size());
+    
+    for (std::size_t k = 0; k < jacob.size(); ++k)
+	{
+        std::size_t index = jacob[k];
+        if (index >= pend_chain.size())
+		      break;
+        int element = pend_chain[index];
+        int low = 0;
+		int high = main_chain.size();
+        while (low < high)
+		{
+            int mid = low + (high - low) / 2;
+            if (main_chain[mid] < element)
+                low = mid + 1;
+			else 
+                high = mid;
+        }
+        main_chain.insert(main_chain.begin() + low, element);
+    }
+}
+
 
 void DivideandSortPairs(std::vector<int>& vec)
 {
@@ -60,8 +100,27 @@ void DivideandSortPairs(std::vector<int>& vec)
 		vec.push_back(pairs[i].first);
 		vec.push_back(pairs[i].second);
 	}
-    if (hasUnpaired)
+	std::vector<int> main_chain;
+	std::vector<int> pend_chain;
+	for (std::size_t i = 0; i < vec.size(); i++)
+	{
+		if (i % 2 == 0)
+		   main_chain.push_back(vec[i]);
+		else
+		    pend_chain.push_back(vec[i]);
+	}
+	if (!pend_chain.empty())
+    {
+        main_chain.insert(main_chain.begin(), pend_chain.front());
+        pend_chain.erase(pend_chain.begin());
+    }
+	if (hasUnpaired)
         vec.push_back(lastElement);
+	MergeChains(main_chain, pend_chain);
+	std::cout << "Final Main Chain: ";
+    for (std::size_t i = 0; i < main_chain.size(); ++i)
+      std::cout << main_chain[i] << " ";
+	std::cout << std::endl;
 }
 
 void	PmergeMe::Ford_johnson(const std::string& result)
@@ -84,13 +143,5 @@ void	PmergeMe::Ford_johnson(const std::string& result)
         }
 
 	}
-	std::cout << "Before:";
-	for (std::size_t i = 0; i < vec.size(); i++)
-		std::cout << vec[i] << " ";
-	std::cout << std::endl;
     DivideandSortPairs(vec);
-	std::cout << "after:";
-	for (std::size_t i = 0; i < vec.size(); i++)
-		std::cout << vec[i] << " ";
-	std::cout << std::endl;
 } 
