@@ -33,49 +33,31 @@ void InsertionSort(std::vector<std::pair<int, int> >& pairs)
     }
 }
 
-std::vector<int> GenerateJacob(int n)
-{
-    std::vector<int> jacob;
-    int i = 0;
-    while (true)
-	{
-        int j = (1 << i) - (i % 2 == 0 ? 1 : -1) / 3;
-        if (j >= n) 
-		    break;
-        jacob.push_back(j);
-        i++;
-    }
-    return (jacob);
-}
-
-
 void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
 {
-    std::vector<int> jacob = GenerateJacob(pend_chain.size());
-    
-    for (std::size_t k = 0; k < jacob.size(); ++k)
-	{
-        std::size_t index = jacob[k];
-        if (index >= pend_chain.size())
-		      break;
-        int element = pend_chain[index];
+    for (std::size_t i = 0; i < pend_chain.size(); ++i)
+    {
+        int element = pend_chain[i];
         int low = 0;
-		int high = main_chain.size();
+        int high = main_chain.size();
         while (low < high)
-		{
+        {
             int mid = low + (high - low) / 2;
             if (main_chain[mid] < element)
                 low = mid + 1;
-			else 
+            else
                 high = mid;
         }
         main_chain.insert(main_chain.begin() + low, element);
     }
 }
 
-
 void DivideandSortPairs(std::vector<int>& vec)
 {
+    std::cout << "Before: ";
+    for (size_t i = 0; i < vec.size(); i++)
+        std::cout << vec[i] << " ";
+    std::cout << std::endl;
     std::size_t len = vec.size();
     bool hasUnpaired = (len % 2 == 1);
     int lastElement = 0;
@@ -115,9 +97,8 @@ void DivideandSortPairs(std::vector<int>& vec)
         pend_chain.erase(pend_chain.begin());
     }
 	MergeChains(main_chain, pend_chain);
-	if (hasUnpaired)
-    {
-        vec.push_back(lastElement);
+    if (hasUnpaired)
+    { 
         int low = 0;
         int high = main_chain.size();
         while (low < high)
@@ -128,12 +109,14 @@ void DivideandSortPairs(std::vector<int>& vec)
             else
                 high = mid;
         }
-        main_chain.insert(main_chain.begin() + low, vec.back());
+        main_chain.insert(main_chain.begin() + low, lastElement);
     }
-	std::cout << "Final Main Chain: ";
+    vec.clear();
+    vec = main_chain;
+    std::cout << "after:  ";
     for (std::size_t i = 0; i < main_chain.size(); ++i)
-      std::cout << main_chain[i] << " ";
-	std::cout << std::endl;
+        std::cout << main_chain[i] << " ";
+    std::cout << std::endl;
 }
 
 void	PmergeMe::Ford_johnson(const std::string& result)

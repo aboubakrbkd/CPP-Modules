@@ -19,6 +19,5 @@ int main(int argc, char **argv)
         }
         me.Ford_johnson(combinedArgs);
     }
-
     return 0;
 }
