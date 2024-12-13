@@ -114,9 +114,22 @@ void DivideandSortPairs(std::vector<int>& vec)
         main_chain.insert(main_chain.begin(), pend_chain.front());
         pend_chain.erase(pend_chain.begin());
     }
-	if (hasUnpaired)
-        vec.push_back(lastElement);
 	MergeChains(main_chain, pend_chain);
+	if (hasUnpaired)
+    {
+        vec.push_back(lastElement);
+        int low = 0;
+        int high = main_chain.size();
+        while (low < high)
+        {
+            int mid = low + (high - low) / 2;
+            if (main_chain[mid] < lastElement)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        main_chain.insert(main_chain.begin() + low, vec.back());
+    }
 	std::cout << "Final Main Chain: ";
     for (std::size_t i = 0; i < main_chain.size(); ++i)
       std::cout << main_chain[i] << " ";
