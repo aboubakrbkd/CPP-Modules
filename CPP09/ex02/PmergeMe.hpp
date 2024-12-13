@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
+#include <deque>
 #include <ctime>
 #include <algorithm>
 #include <sstream>
@@ -11,7 +11,7 @@
 class PmergeMe {
 	private:
 		std::vector<int> vec;
-		std::list<int> li;
+		std::deque<int> de;
 	public:
 		PmergeMe();
 		PmergeMe(const PmergeMe& obj);
