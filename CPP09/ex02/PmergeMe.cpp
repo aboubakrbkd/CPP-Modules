@@ -54,6 +54,7 @@ void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
 
 void DivideandSortPairs(std::vector<int>& vec)
 {
+    clock_t start = clock();
     std::cout << "Before: ";
     for (size_t i = 0; i < vec.size(); i++)
         std::cout << vec[i] << " ";
@@ -117,6 +118,10 @@ void DivideandSortPairs(std::vector<int>& vec)
     for (std::size_t i = 0; i < main_chain.size(); ++i)
         std::cout << main_chain[i] << " ";
     std::cout << std::endl;
+    clock_t end = clock();
+    double duration = double(end - start) / CLOCKS_PER_SEC * 1000.0;
+    std::cout << "Time to process a range of " << main_chain.size() << " elements with std::vector ";
+    std::cout << duration << " ms" << std::endl;
 }
 
 void	PmergeMe::Ford_johnson(const std::string& result)
@@ -137,7 +142,6 @@ void	PmergeMe::Ford_johnson(const std::string& result)
             std::cerr << "Invalid number: " << std::endl;
             exit(1);
         }
-
 	}
     DivideandSortPairs(vec);
 } 
