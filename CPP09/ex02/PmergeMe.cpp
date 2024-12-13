@@ -222,7 +222,7 @@ void	PmergeMe::Ford_johnson(const std::string& result)
         }
         else
         {
-            std::cerr << "Invalid number: " << std::endl;
+            std::cerr << "Error" << std::endl;
             exit(1);
         }
 	}
