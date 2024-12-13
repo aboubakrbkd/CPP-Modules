@@ -2,7 +2,7 @@
 
 Bitcoin::Bitcoin() {}
 
-Bitcoin::~Bitcoin() {}
+Bitcoin::~Bitcoin() {if (infile.is_open()) infile.close();};
 
 Bitcoin::Bitcoin(const Bitcoin& obj) {(void)obj;};
 
