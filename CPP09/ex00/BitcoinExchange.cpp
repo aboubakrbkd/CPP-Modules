@@ -118,7 +118,7 @@ void	Bitcoin::parseInputFile()
 	std::string line;
 	std::string date;
 	std::string value_s;
-	if (std::getline(infile, line))
+	if	(std::getline(infile, line))
 	{
 		if (line != "date | value")
 		{
