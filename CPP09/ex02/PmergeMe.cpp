@@ -5,7 +5,6 @@ PmergeMe::~PmergeMe() {};
 PmergeMe::PmergeMe(const PmergeMe& obj) {(void)obj;};
 PmergeMe& PmergeMe::operator=(const PmergeMe& obj){(void)obj; return *this;};
 
-
 std::vector<int> GenerateJacobsthalSequence(std::size_t n)
 {
     std::vector<int> jacob_seq;
@@ -15,9 +14,30 @@ std::vector<int> GenerateJacobsthalSequence(std::size_t n)
     for (std::size_t i = 2; i < n; i++)
     {
         std::size_t next = jacob_seq[i - 1] + 2 * jacob_seq[i - 2];
+        if (next >= n)
+            break;
         jacob_seq.push_back(next);
     }
-    return (jacob_seq);
+    return jacob_seq;
+}
+
+void MergeChains(std::deque<int>& main_chain, std::deque<int>& pend_chain)
+{
+    for (std::size_t i = 0; i < pend_chain.size(); ++i)
+    {
+        int element = pend_chain[i];
+        int low = 0;
+        int high = main_chain.size();
+        while (low < high)
+        {
+            int mid = low + (high - low) / 2;
+            if (main_chain[mid] < element)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        main_chain.insert(main_chain.begin() + low, element);
+    }
 }
 
 bool isValidNumber(const std::string& result)
@@ -44,25 +64,6 @@ void InsertionSort(std::vector<std::pair<int, int> >& pairs)
             --j;
         }
         pairs[j + 1] = key;
-    }
-}
-
-void MergeChains(std::deque<int>& main_chain, std::deque<int>& pend_chain)
-{
-    for (std::size_t i = 0; i < pend_chain.size(); ++i)
-    {
-        int element = pend_chain[i];
-        int low = 0;
-        int high = main_chain.size();
-        while (low < high)
-        {
-            int mid = low + (high - low) / 2;
-            if (main_chain[mid] < element)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-        main_chain.insert(main_chain.begin() + low, element);
     }
 }
 
@@ -130,24 +131,66 @@ void DivideandSortPairs(std::deque<int>& deq)
     std::cout << duration << " ms" << std::endl;
 }
 
+void InsertUsingBinarySearch(std::vector<int>& main_chain, int element)
+{
+    int low = 0, high = main_chain.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (main_chain[mid] < element) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+    main_chain.insert(main_chain.begin() + low, element);
+}
+
+// void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
+// {
+//     for (std::size_t i = 0; i < pend_chain.size(); ++i)
+//     {
+//         int element = pend_chain[i];
+//         int low = 0;
+//         int high = main_chain.size();
+//         while (low < high)
+//         {
+//             int mid = low + (high - low) / 2;
+//             if (main_chain[mid] < element)
+//                 low = mid + 1;
+//             else
+//                 high = mid;
+//         }
+//         main_chain.insert(main_chain.begin() + low, element);
+//     }
+// }
+
 void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
 {
-    for (std::size_t i = 0; i < pend_chain.size(); ++i)
+    // std::vector<int> jacob = GenerateJacobsthalSequence(pend_chain.size());
+    // std::cout << "Jacob: ";
+    // for (std::size_t i = 0; i < jacob.size(); i++)
+    //     std::cout << jacob[i] << " ";
+    // std::cout << std::endl;
+    std::vector<int> jacob;
+    jacob.push_back(0);
+    jacob.push_back(1);
+    jacob.push_back(3);
+    jacob.push_back(2);
+    jacob.push_back(5);
+    jacob.push_back(4);
+    jacob.push_back(11);
+    jacob.push_back(9);
+    jacob.push_back(8);
+    for (std::size_t k = 0; k < jacob.size(); ++k)
     {
-        int element = pend_chain[i];
-        int low = 0;
-        int high = main_chain.size();
-        while (low < high)
-        {
-            int mid = low + (high - low) / 2;
-            if (main_chain[mid] < element)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-        main_chain.insert(main_chain.begin() + low, element);
+        std::size_t index = jacob[k];
+        if (index >= pend_chain.size()) 
+            break;
+        int element = pend_chain[index];
+        InsertUsingBinarySearch(main_chain, element);
     }
 }
+
 
 void DivideandSortPairs(std::vector<int>& vec)
 {
@@ -194,6 +237,10 @@ void DivideandSortPairs(std::vector<int>& vec)
         main_chain.insert(main_chain.begin(), pend_chain.front());
         pend_chain.erase(pend_chain.begin());
     }
+    std::cout << "Pend Chain: ";
+    for (std::size_t i = 0; i < pend_chain.size(); i++)
+        std::cout << pend_chain[i] << " ";
+    std::cout << std::endl;
 	MergeChains(main_chain, pend_chain);
     if (hasUnpaired)
     { 
@@ -233,7 +280,7 @@ void	PmergeMe::Ford_johnson(const std::string& result)
             std::stringstream num_stream(tmp);
             num_stream >> num;
             vec.push_back(num);
-            de.push_back(num);
+            // de.push_back(num);
         }
         else
         {
@@ -242,5 +289,5 @@ void	PmergeMe::Ford_johnson(const std::string& result)
         }
 	}
     DivideandSortPairs(vec);
-    DivideandSortPairs(de);
+    // DivideandSortPairs(de);
 }
