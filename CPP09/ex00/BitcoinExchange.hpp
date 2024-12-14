@@ -19,7 +19,7 @@ class Bitcoin {
 		~Bitcoin();
 		Bitcoin(const Bitcoin& obj);
 		Bitcoin& operator=(const Bitcoin& obj);
-		void	parsing(const std::string& file);
+		void	parsing(std::string& file);
 		void	loaddata();
 		void	parseInputFile();
 };

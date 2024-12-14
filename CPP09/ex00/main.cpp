@@ -9,7 +9,8 @@ int main(int argc, char **argv)
 	}
 	try {
 		Bitcoin btc;
-		btc.parsing(argv[1]);
+		std::string file = argv[1];
+		btc.parsing(file);
 		btc.loaddata();
 		btc.parseInputFile();
 	}

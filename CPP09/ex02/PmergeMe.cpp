@@ -32,26 +32,8 @@ void InsertionSort(std::vector<std::pair<int, int> >& pairs)
         pairs[j + 1] = key;
     }
 }
-void MergeChains(std::deque<int>& main_chain, std::deque<int>& pend_chain)
-{
-    for (std::size_t i = 0; i < pend_chain.size(); ++i)
-    {
-        int element = pend_chain[i];
-        int low = 0;
-        int high = main_chain.size();
-        while (low < high)
-        {
-            int mid = low + (high - low) / 2;
-            if (main_chain[mid] < element)
-                low = mid + 1;
-            else
-                high = mid;
-        }
-        main_chain.insert(main_chain.begin() + low, element);
-    }
-}
 
-void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
+void MergeChains(std::deque<int>& main_chain, std::deque<int>& pend_chain)
 {
     for (std::size_t i = 0; i < pend_chain.size(); ++i)
     {
@@ -132,6 +114,25 @@ void DivideandSortPairs(std::deque<int>& deq)
     double duration = double(end - start) / CLOCKS_PER_SEC * 1000.0;
     std::cout << "Time to process a range of " << main_chain.size() << " elements with std::deque ";
     std::cout << duration << " ms" << std::endl;
+}
+
+void MergeChains(std::vector<int>& main_chain, std::vector<int>& pend_chain)
+{
+    for (std::size_t i = 0; i < pend_chain.size(); ++i)
+    {
+        int element = pend_chain[i];
+        int low = 0;
+        int high = main_chain.size();
+        while (low < high)
+        {
+            int mid = low + (high - low) / 2;
+            if (main_chain[mid] < element)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        main_chain.insert(main_chain.begin() + low, element);
+    }
 }
 
 void DivideandSortPairs(std::vector<int>& vec)
@@ -228,4 +229,4 @@ void	PmergeMe::Ford_johnson(const std::string& result)
 	}
     DivideandSortPairs(vec);
     DivideandSortPairs(de);
-} 
+}

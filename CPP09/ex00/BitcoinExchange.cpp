@@ -8,11 +8,11 @@ Bitcoin::Bitcoin(const Bitcoin& obj) {(void)obj;};
 
 Bitcoin& Bitcoin::operator=(const Bitcoin& obj) {(void)obj; return *this;};
 
-void	Bitcoin::parsing(const std::string& file)
+void	Bitcoin::parsing(std::string& file)
 {
 	if (file.size() < 4 || file.substr(file.size() - 4) != ".txt")
         throw std::invalid_argument("Input file must have a .txt extension");
-	infile.open(file);
+	infile.open(file.c_str());
 	if (!infile.is_open())
 		throw std::runtime_error("Cannot open The infile");
 	data_file.open("data.csv");
@@ -61,7 +61,7 @@ bool isValidValue(std::string& value)
     }
 	for (size_t i = 0; i < value.size(); i++)
 	{
-		if ((i == 0 && value[i] == '.') || i == value.size() - 1 && value[i] == '.')
+		if ((i == 0 && value[i] == '.') || (i == value.size() - 1 && value[i] == '.'))
 			return false;
 		if (value[i] == '.')
 			count++;
