@@ -62,11 +62,17 @@ bool isValidValue(std::string& value)
 	for (size_t i = 0; i < value.size(); i++)
 	{
 		if ((i == 0 && value[i] == '.') || (i == value.size() - 1 && value[i] == '.'))
+		{
+			std::cerr << "Not a number!" << std::endl;
 			return false;
+		}
 		if (value[i] == '.')
 			count++;
 		else if (!std::isdigit(value[i]))
+		{
+			std::cerr << "Not a number!" << std::endl;
 			return false;
+		}
 	}
 	if (count > 1)
 		return false;
